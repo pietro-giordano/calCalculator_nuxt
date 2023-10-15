@@ -24,6 +24,8 @@
                                           {{ link.text }}
                                     </a>
                               </li>
+                              <button1 content="Login" />
+                              <button2 content="Sign Up" />
                         </ul>
                   </nav>
             </div>
@@ -31,6 +33,7 @@
 </template>
 
 <script lang="ts" setup>
+
 interface NavLink {
       text: string,
       linkTo: string
@@ -45,8 +48,6 @@ const navbar: NavLink[] = [
       },
 ]
 </script>
-
-
 
 <style>
 #menu-toggle:checked+#menu {
