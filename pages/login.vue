@@ -38,8 +38,38 @@ const loginForm = ref({
       password: "keyblade87"
 })
 
-function login() {
+async function login() {
+      // chiediamo csrf-cookie a laravel-sanctum
+      await useFetch("http://localhost:8000/sanctum/csrf-cookie", {
+            credentials: "include",
+      });
 
+      // salviamo il token del cookie 
+      const token = useCookie('XSRF-TOKEN');
+
+      // inviamo dati per login
+      await useFetch("http://localhost:8000/login", {
+            credentials: "include",
+            method: 'POST',
+            body: loginForm.value,
+            // settiamo watch a false per evitare che al cambiare dei parametri effettui un'altra chiamata
+            watch: false,
+            // passiamo il token dal cookie nell'headers
+            headers: {
+                  'X-XSRF-TOKEN': token.value as string
+            }
+      });
+
+      // salviamo in data i dati dello user
+      const { data } = await useFetch("http://localhost:8000/api/user", {
+            credentials: "include",
+            watch: false,
+            headers: {
+                  'X-XSRF-TOKEN': token.value as string
+            }
+      });
+
+      console.log(data);
 }
 </script>
 
