@@ -9,7 +9,11 @@ module.exports = {
             "./error.vue",
       ],
       theme: {
-            extend: {},
+            extend: {
+                  boxShadow: {
+                        'xl': '0 0 10px 4px rgba(0, 0, 0, 0.3)',
+                  }
+            },
             container: {
                   center: true
             }

@@ -1,5 +1,5 @@
 <template>
-      <nav class="flex flex-col lg:flex-row lg:px-20 px-6 lg:py-2 py-2 bg-white shadow-md">
+      <nav class="flex flex-col lg:flex-row lg:px-20 px-6 lg:py-2 py-2 bg-white shadow-md shadow-red-200">
             <div class="flex justify-between lg:justify-normal">
                   <nuxt-link to="/" class="flex items-center text-lg font-semibold">
                         <img src="/559birthdaycake3_100233.svg" width="50" height="50" alt="Rz Codes Logo" />
@@ -38,8 +38,13 @@
                   </ul>
 
                   <ul class="text-xl text-center items-center justify-center gap-x-4 lg:text-lg flex py-3 lg:py-0">
-                        <button1 content="Sign Up" />
-                        <button2 content="Login" />
+                        <NuxtLink to="/login">
+                              <button1 content="Login" />
+                        </NuxtLink>
+
+                        <NuxtLink to="/register">
+                              <button2 content="Sign Up" />
+                        </NuxtLink>
                   </ul>
             </div>
       </nav>
