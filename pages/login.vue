@@ -40,34 +40,16 @@ const loginForm = ref({
 
 async function login() {
       // chiediamo csrf-cookie a laravel-sanctum
-      await useFetch("http://localhost:8000/sanctum/csrf-cookie", {
-            credentials: "include",
-      });
-
-      // salviamo il token del cookie 
-      const token = useCookie('XSRF-TOKEN');
+      await useApiFetch("/sanctum/csrf-cookie");
 
       // inviamo dati per login
-      await useFetch("http://localhost:8000/login", {
-            credentials: "include",
+      await useFetch("/login", {
             method: 'POST',
-            body: loginForm.value,
-            // settiamo watch a false per evitare che al cambiare dei parametri effettui un'altra chiamata
-            watch: false,
-            // passiamo il token dal cookie nell'headers
-            headers: {
-                  'X-XSRF-TOKEN': token.value as string
-            }
+            body: loginForm.value
       });
 
       // salviamo in data i dati dello user
-      const { data } = await useFetch("http://localhost:8000/api/user", {
-            credentials: "include",
-            watch: false,
-            headers: {
-                  'X-XSRF-TOKEN': token.value as string
-            }
-      });
+      const { data } = await useFetch("/api/user");
 
       console.log(data);
 }
