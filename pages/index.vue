@@ -1,6 +1,6 @@
 <template>
       <div>
-            <h1>Benvenuto</h1>
+            <h1>Benvenuto {{ auth.user.name }}</h1>
 
             <div>
                   <nuxt-link to="/login">
@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts" setup>
-
+const auth = useAuthStore();
 </script>
 
 

@@ -32,26 +32,30 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useAuthStore } from '~/stores/useAuthStore';
 
 const loginForm = ref({
       email: "giopi87@gmail.com",
       password: "keyblade87"
 })
 
+const auth = useAuthStore();
+
 async function login() {
-      // chiediamo csrf-cookie a laravel-sanctum
-      await useApiFetch("/sanctum/csrf-cookie");
+      // se già loggato rimanda a home
+      if (auth.isLoggedIn) {
+            return navigateTo("/");
+      }
 
-      // inviamo dati per login
-      await useFetch("/login", {
-            method: 'POST',
-            body: loginForm.value
-      });
+      // recupera errore se presente
+      const { error } = await auth.login(loginForm.value);
 
-      // salviamo in data i dati dello user
-      const { data } = await useFetch("/api/user");
+      // se non ci sono errori ritorna a home
+      if (!error.value) {
+            return navigateTo("/");
+      }
 
-      console.log(data);
+      console.log(error);
 }
 </script>
 
