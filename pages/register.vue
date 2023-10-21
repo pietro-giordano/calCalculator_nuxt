@@ -43,7 +43,7 @@
 
                   <div>
                         <NuxtLink to="">
-                              <Button1 content="Login" type="submit" />
+                              <Button1 content="Register" type="submit" />
                         </NuxtLink>
                   </div>
             </form>
