@@ -1,6 +1,6 @@
 <template>
       <div>
-            <h1>Benvenuto {{ auth.user.name }}</h1>
+            <h1>Benvenuto {{ auth.user }}</h1>
 
             <div>
                   <nuxt-link to="/login">
@@ -21,6 +21,8 @@
 </template>
 
 <script lang="ts" setup>
+import { useAuthStore } from "~/stores/useAuthStore";
+
 const auth = useAuthStore();
 </script>
 

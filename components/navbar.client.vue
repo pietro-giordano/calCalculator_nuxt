@@ -38,12 +38,16 @@
                   </ul>
 
                   <ul class="text-xl text-center items-center justify-center gap-x-4 lg:text-lg flex py-3 lg:py-0">
-                        <NuxtLink to="/login">
+                        <NuxtLink to="/login" v-if="!auth.isLoggedIn">
                               <button1 content="Login" />
                         </NuxtLink>
 
-                        <NuxtLink to="/register">
+                        <NuxtLink to="/register" v-if="!auth.isLoggedIn">
                               <button2 content="Sign Up" />
+                        </NuxtLink>
+
+                        <NuxtLink to="/register" v-if="auth.isLoggedIn" @click="handleLogout()">
+                              <button1 content="Logout" />
                         </NuxtLink>
                   </ul>
             </div>
@@ -52,6 +56,9 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { useAuthStore } from "~/stores/useAuthStore";
+
+const auth = useAuthStore();
 const open = ref(false);
 
 interface NavLink {
@@ -67,6 +74,10 @@ const navbar: NavLink[] = [
             linkTo: '#'
       },
 ]
+
+async function handleLogout() {
+      await auth.logout();
+}
 </script>
 
 <style>
