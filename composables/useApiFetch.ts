@@ -3,8 +3,8 @@ import { useRequestHeaders } from "nuxt/app";
 
 export function useApiFetch<T>(path: string, options: UseFetchOptions<T> = {}) {
       let headers: any = {
-            accept: "application/json",
-            referer: "http://localhost:3000"
+            accept: "application/json",        // da non dimenticare, così riceveremo json
+            referer: "http://localhost:3000"  // da inoltrare sempre così laravel percepisce come dominio riconosciutohe viene dal nostro frontend, quindi da un dominio riconosciuto
       }
 
       // salviamo il token del cookie 
@@ -18,7 +18,6 @@ export function useApiFetch<T>(path: string, options: UseFetchOptions<T> = {}) {
             headers = {
                   ...headers,
                   ...useRequestHeaders(["cookie"]),
-                  referer: "http://localhost:3000",
             }
       }
 

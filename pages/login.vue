@@ -33,6 +33,11 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useAuthStore } from '~/stores/useAuthStore';
+import { definePageMeta } from '#imports';
+
+definePageMeta({
+      middleware: ['guest']
+});
 
 const loginForm = ref({
       email: "giopi87@gmail.com",

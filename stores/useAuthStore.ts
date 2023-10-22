@@ -30,8 +30,9 @@ export const useAuthStore = defineStore('auth', () => {
       }
 
       async function fetchUser() {
-            // salviamo in data i dati dello user
-            const { data } = await useApiFetch("/api/user");
+            // destructuring di data ed error
+            const { data, error } = await useApiFetch("/api/user");
+            console.log(error);
             // recuperati i dati li impostiamo su user.value
             user.value = data.value as User;
       }
