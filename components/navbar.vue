@@ -68,10 +68,10 @@ interface NavLink {
 const navbar: NavLink[] = [
       {
             text: 'Ricette',
-            linkTo: '#'
+            linkTo: '/recipes/search'
       }, {
             text: 'Ingredienti',
-            linkTo: '#'
+            linkTo: '/ingredients/search'
       },
 ]
 

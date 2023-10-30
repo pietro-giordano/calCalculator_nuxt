@@ -1,6 +1,9 @@
 <template>
-      <div>
-            <h1>Benvenuto {{ auth.user }}</h1>
+      <div class="flex flex-col items-center">
+            <div class="text-xl uppercase mb-5 flex flex-col items-center">
+                  Benvenuto
+                  <span v-if="auth.user">{{ auth.user.name }}</span>
+            </div>
 
             <div>
                   <nuxt-link to="/login" v-if="!auth.isLoggedIn">
@@ -9,13 +12,21 @@
             </div>
       </div>
 
-      <div class="container px-20 py-20" v-if="auth.isLoggedIn">
-            <NuxtLink to="/recipes/create" class="border-2 border-red-500 bg-red-200 p-6">
-                  Add new Recipe
+      <div class="container px-20 py-20 grid grid-cols-2 gap-4 uppercase" v-if="auth.isLoggedIn">
+            <NuxtLink to="/recipes/search" class="border-2 border-red-500 bg-red-200 p-6 text-center">
+                  Ricette
             </NuxtLink>
 
-            <NuxtLink to="/ingredients/create" class="border-2 border-red-500 bg-red-200 p-6">
-                  Add new Ingredient
+            <NuxtLink to="/ingredients/search" class="border-2 border-red-500 bg-red-200 p-6 text-center">
+                  Ingredienti
+            </NuxtLink>
+
+            <NuxtLink to="/recipes/create" class="border-2 border-red-500 bg-red-200 p-6 text-center">
+                  Aggiungi ricetta
+            </NuxtLink>
+
+            <NuxtLink to="/ingredients/create" class="border-2 border-red-500 bg-red-200 p-6 text-center">
+                  Aggiungi ingrediente
             </NuxtLink>
       </div>
 </template>
