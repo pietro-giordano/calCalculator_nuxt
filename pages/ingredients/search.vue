@@ -27,11 +27,6 @@ definePageMeta({
       middleware: ['auth']
 });
 
-type Ingredient = {
-      product_name: String,
-
-}
-
 const search = ref();
 
 async function searchIngredients() {

@@ -1,5 +1,5 @@
 <template>
-      <form class="container mt-8 mb-2 min-w-xs md:min-w-[672px] lg:min-w-[896px]">
+      <form @submit.prevent="handleNewIngredient" class="container mt-8 mb-2 min-w-xs md:min-w-[672px] lg:min-w-[896px]">
             <div class="mb-10 pb-10 grid md:grid-cols-2 gap-6">
                   <CustomInput type="text" content="Nome" name="Nome" v-model="newIngredient.name" />
 
@@ -27,6 +27,10 @@
             <div class="mb-4 grid md:grid-cols-4 gap-6">
                   <CustomInput :type="info.type" v-for="info in nutritionalInfo" :content="info.content" :name="info.content"
                         v-model="info.newIngredientProperty" />
+            </div>
+
+            <div>
+                  <Button1 content="Salva e crea" type="submit" />
             </div>
       </form>
 </template>
@@ -70,20 +74,6 @@ const nutritionalInfo = ref([
       }
 ]);
 
-type Ingredient = {
-      name: string,
-      brand: string,
-      description?: string,
-      image?: Blob,
-      calories: number,
-      fats: number,
-      saturatedFats: number,
-      proteins: number,
-      carbs: number,
-      sugars?: number,
-      fibers?: number
-}
-
 const newIngredient = ref<Ingredient>({
       name: '',
       brand: '',
@@ -97,6 +87,10 @@ const newIngredient = ref<Ingredient>({
       sugars: 0,
       fibers: 0
 });
+
+async function handleNewIngredient() {
+      console.log(newIngredient);
+}
 </script>
 
 <style></style>
