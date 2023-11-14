@@ -3,7 +3,7 @@
             <Navbar />
 
             <div class="flex justify-center my-10">
-                  <div class="shadow-xl shadow-red-300 rounded p-6">
+                  <div class="shadow-xl shadow-red-300 border-b-2 border-red-300 rounded p-6">
 
                         <slot />
 

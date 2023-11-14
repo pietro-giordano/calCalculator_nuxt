@@ -61,11 +61,7 @@ import { useAuthStore } from "~/stores/useAuthStore";
 const auth = useAuthStore();
 const open = ref(false);
 
-interface NavLink {
-      text: string,
-      linkTo: string
-}
-const navbar: NavLink[] = [
+const navbar = ref([
       {
             text: 'Ricette',
             linkTo: '/recipes/search'
@@ -73,7 +69,7 @@ const navbar: NavLink[] = [
             text: 'Ingredienti',
             linkTo: '/ingredients/search'
       },
-]
+]);
 
 async function handleLogout() {
       await auth.logout();
