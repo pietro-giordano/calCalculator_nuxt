@@ -1,9 +1,9 @@
 <template>
       <form class="container mt-8 mb-2 min-w-xs md:min-w-[672px] lg:min-w-[896px]">
             <div class="mb-10 pb-10 grid md:grid-cols-2 gap-6">
-                  <InputText type="text" content="Nome" name="Nome" />
+                  <CustomInput type="text" content="Nome" name="Nome" v-model="newIngredient.name" />
 
-                  <InputText type="text" content="Marchio" name="Marchio" />
+                  <CustomInput type="text" content="Marchio" name="Marchio" v-model="newIngredient.brand" />
 
                   <div class="relative h-32 w-full min-w-[200px] col-span-2">
                         <textarea id="Descrizione"
@@ -25,8 +25,8 @@
             </div>
 
             <div class="mb-4 grid md:grid-cols-4 gap-6">
-                  <InputText :type="info.type" v-for="info, index in nutritionalInfo" :content="info.content"
-                        :name="info.content" v-model="newIngredient['name']" />
+                  <CustomInput :type="info.type" v-for="info in nutritionalInfo" :content="info.content" :name="info.content"
+                        v-model="info.newIngredientProperty" />
             </div>
       </form>
 </template>
@@ -41,25 +41,32 @@ definePageMeta({
 const nutritionalInfo = ref([
       {
             content: 'Calorie',
-            type: 'number'
+            type: 'number',
+            newIngredientProperty: 'newIngredient.calories'
       }, {
             content: 'Grassi',
-            type: 'number'
+            type: 'number',
+            newIngredientProperty: 'newIngredient.fats'
       }, {
             content: 'Grassi saturi',
-            type: 'number'
+            type: 'number',
+            newIngredientProperty: 'newIngredient.saturatedFats'
       }, {
             content: 'Proteine',
-            type: 'number'
+            type: 'number',
+            newIngredientProperty: 'newIngredient.proteins'
       }, {
             content: 'Carboidrati',
-            type: 'number'
+            type: 'number',
+            newIngredientProperty: 'newIngredient.carbs'
       }, {
             content: 'Zuccheri',
-            type: 'number'
+            type: 'number',
+            newIngredientProperty: 'newIngredient.sugars'
       }, {
             content: 'Fibre',
-            type: 'number'
+            type: 'number',
+            newIngredientProperty: 'newIngredient.fibers'
       }
 ]);
 
@@ -76,7 +83,20 @@ type Ingredient = {
       sugars?: number,
       fibers?: number
 }
-const newIngredient = ref<Ingredient>();
+
+const newIngredient = ref<Ingredient>({
+      name: '',
+      brand: '',
+      description: '',
+      image: undefined,
+      calories: 0,
+      fats: 0,
+      saturatedFats: 0,
+      proteins: 0,
+      carbs: 0,
+      sugars: 0,
+      fibers: 0
+});
 </script>
 
 <style></style>
