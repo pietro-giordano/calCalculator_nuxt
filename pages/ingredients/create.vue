@@ -6,7 +6,7 @@
                   <CustomInput type="text" content="Marchio" name="Marchio" v-model="newIngredient.brand" />
 
                   <div class="relative h-32 w-full min-w-[200px] col-span-2">
-                        <textarea id="Descrizione"
+                        <textarea id="Descrizione" v-model="newIngredient.description"
                               class="h-full w-full rounded-md border-2 border-pink-500 px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0"
                               placeHolder=" "></textarea>
                         <label for="Descrizione"
@@ -26,7 +26,7 @@
 
             <div class="mb-4 grid md:grid-cols-4 gap-6">
                   <CustomInput :type="info.type" v-for="info in nutritionalInfo" :content="info.content" :name="info.content"
-                        v-model="info.newIngredientProperty" />
+                        v-model="newIngredient[info.property]" />
             </div>
 
             <div>
@@ -46,31 +46,31 @@ const nutritionalInfo = ref([
       {
             content: 'Calorie',
             type: 'number',
-            newIngredientProperty: 'newIngredient.calories'
+            property: 'calories_hundred_grams'
       }, {
             content: 'Grassi',
             type: 'number',
-            newIngredientProperty: 'newIngredient.fats'
+            property: 'fats_hundred_grams'
       }, {
             content: 'Grassi saturi',
             type: 'number',
-            newIngredientProperty: 'newIngredient.saturatedFats'
+            property: 'saturated_fats_hundred_grams'
       }, {
             content: 'Proteine',
             type: 'number',
-            newIngredientProperty: 'newIngredient.proteins'
+            property: 'proteins_hundred_grams'
       }, {
             content: 'Carboidrati',
             type: 'number',
-            newIngredientProperty: 'newIngredient.carbs'
+            property: 'carbs_hundred_grams'
       }, {
             content: 'Zuccheri',
             type: 'number',
-            newIngredientProperty: 'newIngredient.sugars'
+            property: 'sugars_hundred_grams'
       }, {
             content: 'Fibre',
             type: 'number',
-            newIngredientProperty: 'newIngredient.fibers'
+            property: 'fibers_hundred_grams'
       }
 ]);
 
@@ -79,17 +79,23 @@ const newIngredient = ref<Ingredient>({
       brand: '',
       description: '',
       image: undefined,
-      calories: 0,
-      fats: 0,
-      saturatedFats: 0,
-      proteins: 0,
-      carbs: 0,
-      sugars: 0,
-      fibers: 0
+      calories_hundred_grams: 0,
+      fats_hundred_grams: 0,
+      saturated_fats_hundred_grams: 0,
+      proteins_hundred_grams: 0,
+      carbs_hundred_grams: 0,
+      sugars_hundred_grams: 0,
+      fibers_hundred_grams: 0,
+      personally_created: true,
 });
 
 async function handleNewIngredient() {
-      console.log(newIngredient);
+      const { data } = await useApiFetch('/api/ingredients', {
+            method: 'POST',
+            body: newIngredient.value
+      })
+
+      console.log(newIngredient.value)
 }
 </script>
 
