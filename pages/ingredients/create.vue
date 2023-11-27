@@ -90,12 +90,59 @@ const newIngredient = ref<Ingredient>({
 });
 
 async function handleNewIngredient() {
-      const { data } = await useApiFetch('/api/ingredients', {
+      await useApiFetch('/api/ingredients', {
             method: 'POST',
-            body: newIngredient.value
+            body: newIngredient.value,
+            onResponse({ response }) {
+                  if (response.status == 200) {
+                        newIngredient.value.name = '';
+                        newIngredient.value.brand = '';
+                        newIngredient.value.description = '';
+                        newIngredient.value.calories_hundred_grams = 0;
+                        newIngredient.value.fats_hundred_grams = 0;
+                        newIngredient.value.saturated_fats_hundred_grams = 0;
+                        newIngredient.value.proteins_hundred_grams = 0;
+                        newIngredient.value.carbs_hundred_grams = 0;
+                        newIngredient.value.sugars_hundred_grams = 0;
+                        newIngredient.value.fibers_hundred_grams = 0;
+                        console.log("inserimento effettuato con successo")
+                  } else {
+                        const { _data } = response;
+                        const { errors } = _data;
+                        for (let x in errors) {
+                              console.log(errors[x])
+                        }
+                  }
+            },
       })
 
-      console.log(newIngredient.value)
+      // console.log(data.value)
+      // console.log(errors)
+
+      // if (typeof data.value === 'object' && data.value !== null) {
+      //       // Usa un type casting per informare TypeScript sul tipo dell'oggetto
+      //       const typedValue = data.value as { success: boolean, message: string };
+
+      //       // Ora puoi accedere alle proprietà dell'oggetto con sicurezza
+      //       if (typedValue.success === true) {
+      //             newIngredient.value.name = '',
+      //                   newIngredient.value.brand = '',
+      //                   newIngredient.value.description = '',
+      //                   newIngredient.value.calories_hundred_grams = 0,
+      //                   newIngredient.value.fats_hundred_grams = 0,
+      //                   newIngredient.value.saturated_fats_hundred_grams = 0,
+      //                   newIngredient.value.proteins_hundred_grams = 0,
+      //                   newIngredient.value.carbs_hundred_grams = 0,
+      //                   newIngredient.value.sugars_hundred_grams = 0,
+      //                   newIngredient.value.fibers_hundred_grams = 0,
+
+      //                   console.log(typedValue.message)
+      //       }
+      // } else {
+      //       const typedValue = errors as { data: any };
+      //       // Tratta il caso in cui data.value non sia un oggetto
+      //       console.error('data.value non è un oggetto valido');
+      // }
 }
 </script>
 
