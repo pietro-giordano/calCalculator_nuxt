@@ -39,15 +39,15 @@
 
                   <ul class="text-xl text-center items-center justify-center gap-x-4 lg:text-lg flex py-3 lg:py-0">
                         <NuxtLink to="/login" v-if="!auth.isLoggedIn">
-                              <button1 content="Login" />
+                              <Button content="Login" class="bg-red-600 border-red-600 text-white focus:ring-red-200" />
                         </NuxtLink>
 
                         <NuxtLink to="/register" v-if="!auth.isLoggedIn">
-                              <button2 content="Sign Up" />
+                              <Button content="Sign Up" class="border-red-600 text-red-600 focus:ring-red-200" />
                         </NuxtLink>
 
                         <NuxtLink to="/register" v-if="auth.isLoggedIn" @click="handleLogout()">
-                              <button1 content="Logout" />
+                              <Button content="Logout" class="bg-red-600 border-red-600 text-white focus:ring-red-200" />
                         </NuxtLink>
                   </ul>
             </div>

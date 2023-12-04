@@ -23,7 +23,8 @@
 
                   <div>
                         <NuxtLink to="">
-                              <Button1 content="Login" type="submit" />
+                              <Button content="Login" type="submit"
+                                    class="bg-red-600 border-red-600 text-white focus:ring-red-200" />
                         </NuxtLink>
                   </div>
             </form>

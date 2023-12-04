@@ -7,7 +7,7 @@
 
             <div>
                   <nuxt-link to="/login" v-if="!auth.isLoggedIn">
-                        <button1 content="Login" />
+                        <Button content="Login" class="bg-red-600 border-red-600 text-white focus:ring-red-200" />
                   </nuxt-link>
             </div>
       </div>

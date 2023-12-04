@@ -30,9 +30,12 @@
             </div>
 
             <div>
-                  <Button1 content="Salva e crea" type="submit" />
+                  <Button content="Salva e crea" type="submit"
+                        class="bg-red-600 border-red-600 text-white focus:ring-red-200" />
             </div>
       </form>
+
+      <Alert v-if="visibilityAlert" @click="handleVisibilityAlert()" :errors="errorsFetch" />
 </template>
       
 <script lang="ts" setup>
@@ -79,15 +82,22 @@ const newIngredient = ref<Ingredient>({
       brand: '',
       description: '',
       image: undefined,
-      calories_hundred_grams: 0,
-      fats_hundred_grams: 0,
-      saturated_fats_hundred_grams: 0,
-      proteins_hundred_grams: 0,
-      carbs_hundred_grams: 0,
-      sugars_hundred_grams: 0,
-      fibers_hundred_grams: 0,
+      calories_hundred_grams: undefined,
+      fats_hundred_grams: undefined,
+      saturated_fats_hundred_grams: undefined,
+      proteins_hundred_grams: undefined,
+      carbs_hundred_grams: undefined,
+      sugars_hundred_grams: undefined,
+      fibers_hundred_grams: undefined,
       personally_created: true,
 });
+
+const visibilityAlert = ref<boolean>(false);       // flag per visibilità modale
+function handleVisibilityAlert() {
+      visibilityAlert.value = !visibilityAlert;
+}
+
+const errorsFetch = ref<string[]>();       // eventuali errori risultati da chiamata post
 
 async function handleNewIngredient() {
       await useApiFetch('/api/ingredients', {
@@ -105,44 +115,16 @@ async function handleNewIngredient() {
                         newIngredient.value.carbs_hundred_grams = 0;
                         newIngredient.value.sugars_hundred_grams = 0;
                         newIngredient.value.fibers_hundred_grams = 0;
-                        console.log("inserimento effettuato con successo")
+                        console.log("inserimento effettuato con successo");
+                        visibilityAlert.value = true;
                   } else {
                         const { _data } = response;
                         const { errors } = _data;
-                        for (let x in errors) {
-                              console.log(errors[x])
-                        }
+                        errorsFetch.value = errors;
+                        visibilityAlert.value = true;
                   }
             },
       })
-
-      // console.log(data.value)
-      // console.log(errors)
-
-      // if (typeof data.value === 'object' && data.value !== null) {
-      //       // Usa un type casting per informare TypeScript sul tipo dell'oggetto
-      //       const typedValue = data.value as { success: boolean, message: string };
-
-      //       // Ora puoi accedere alle proprietà dell'oggetto con sicurezza
-      //       if (typedValue.success === true) {
-      //             newIngredient.value.name = '',
-      //                   newIngredient.value.brand = '',
-      //                   newIngredient.value.description = '',
-      //                   newIngredient.value.calories_hundred_grams = 0,
-      //                   newIngredient.value.fats_hundred_grams = 0,
-      //                   newIngredient.value.saturated_fats_hundred_grams = 0,
-      //                   newIngredient.value.proteins_hundred_grams = 0,
-      //                   newIngredient.value.carbs_hundred_grams = 0,
-      //                   newIngredient.value.sugars_hundred_grams = 0,
-      //                   newIngredient.value.fibers_hundred_grams = 0,
-
-      //                   console.log(typedValue.message)
-      //       }
-      // } else {
-      //       const typedValue = errors as { data: any };
-      //       // Tratta il caso in cui data.value non sia un oggetto
-      //       console.error('data.value non è un oggetto valido');
-      // }
 }
 </script>
 

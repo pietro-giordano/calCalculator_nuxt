@@ -7,11 +7,11 @@ interface GeneralInfo {
 }
 
 interface NutInfoHundred {
-      calories_hundred_grams: number,
-      fats_hundred_grams: number,
-      saturated_fats_hundred_grams: number,
-      proteins_hundred_grams: number,
-      carbs_hundred_grams: number,
+      calories_hundred_grams?: number,
+      fats_hundred_grams?: number,
+      saturated_fats_hundred_grams?: number,
+      proteins_hundred_grams?: number,
+      carbs_hundred_grams?: number,
       sugars_hundred_grams?: number,
       fibers_hundred_grams?: number,
 }
