@@ -12,7 +12,7 @@
 
                         <ul class="">
                               <li v-for="error in errors">
-                                    {{ error }}
+                                    {{ error[0] }}
                               </li>
                         </ul>
                   </div>

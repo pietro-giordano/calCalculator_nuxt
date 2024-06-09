@@ -1,14 +1,15 @@
 <template>
       <form @submit.prevent="handleNewIngredient" class="container mt-8 mb-2 min-w-xs md:min-w-[672px] lg:min-w-[896px]">
             <div class="mb-10 pb-10 grid md:grid-cols-2 gap-6">
-                  <CustomInput type="text" content="Nome" name="Nome" v-model="newIngredient.name" />
+                  <CustomInput type="text" content="Nome" name="Nome" v-model="newIngredient.name" placeholder="richiesto" />
 
-                  <CustomInput type="text" content="Marchio" name="Marchio" v-model="newIngredient.brand" />
+                  <CustomInput type="text" content="Marchio" name="Marchio" v-model="newIngredient.brand"
+                        placeholder="richiesto" />
 
                   <div class="relative h-32 w-full min-w-[200px] col-span-2">
                         <textarea id="Descrizione" v-model="newIngredient.description"
                               class="h-full w-full rounded-md border-2 border-pink-500 px-3 py-3 font-sans text-sm font-normal text-blue-gray-700 outline outline-0"
-                              placeHolder=" "></textarea>
+                              placeHolder="opzionale"></textarea>
                         <label for="Descrizione"
                               class="absolute p-1 left-3 -top-[11px] flex bg-white text-[11px] font-normal leading-tight text-pink-500">
                               Descrizione
@@ -26,7 +27,7 @@
 
             <div class="mb-4 grid md:grid-cols-4 gap-6">
                   <CustomInput :type="info.type" v-for="info in nutritionalInfo" :content="info.content" :name="info.content"
-                        v-model="newIngredient[info.property]" />
+                        v-model="newIngredient[info.property]" :placeholder="info.placeholder" />
             </div>
 
             <div>
@@ -49,31 +50,38 @@ const nutritionalInfo = ref([
       {
             content: 'Calorie',
             type: 'number',
-            property: 'calories_hundred_grams'
+            property: 'calories_hundred_grams',
+            placeholder: 'richiesto'
       }, {
             content: 'Grassi',
             type: 'number',
-            property: 'fats_hundred_grams'
+            property: 'fats_hundred_grams',
+            placeholder: 'richiesto'
       }, {
             content: 'Grassi saturi',
             type: 'number',
-            property: 'saturated_fats_hundred_grams'
+            property: 'saturated_fats_hundred_grams',
+            placeholder: 'richiesto'
       }, {
             content: 'Proteine',
             type: 'number',
-            property: 'proteins_hundred_grams'
+            property: 'proteins_hundred_grams',
+            placeholder: 'richiesto'
       }, {
             content: 'Carboidrati',
             type: 'number',
-            property: 'carbs_hundred_grams'
+            property: 'carbs_hundred_grams',
+            placeholder: 'richiesto'
       }, {
             content: 'Zuccheri',
             type: 'number',
-            property: 'sugars_hundred_grams'
+            property: 'sugars_hundred_grams',
+            placeholder: 'opzionale'
       }, {
             content: 'Fibre',
             type: 'number',
-            property: 'fibers_hundred_grams'
+            property: 'fibers_hundred_grams',
+            placeholder: 'opzionale'
       }
 ]);
 

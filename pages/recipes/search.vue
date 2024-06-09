@@ -4,7 +4,7 @@
             <form>
                   <input type="text" class="border-2 border-red-500 p-2 rounded-lg me-4" placeholder="Cerca ricetta">
 
-                  <Button1 content="Cerca" />
+                  <Button content="Cerca" />
             </form>
 
             <div>
